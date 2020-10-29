@@ -1,5 +1,3 @@
-
-
 <html>
 <head>
     <title>User Registration | PHP</title></head>
@@ -64,28 +62,136 @@ mysqli_close($link);
                 <hr class="mb-3">
                         
                 <label for="firstname"><b>First Name</b></label>
-                <input class="form-control" type="text" name="firstname" required>
+                <input class="form-control" type="text" id="firstname" name="firstname" required>
                 
                 <label for="lastname"><b>Last Name</b></label>
-                <input class="form-control" type="text" name="lastname" required>
+                <input class="form-control" type="text" id="lastname" name="lastname" required>
                 
                 <label for="email"><b>Email Address</b></label>
-                <input class="form-control" type="email" name="email" required>
+                <input class="form-control" type="email" id="email" name="email" required>
                 
                 <label for="phone"><b>Phone Number</b></label>
-                <input class="form-control" type="phone" name="phone" required>
+                <input class="form-control" type="phone" id="phone" name="phone" required>
                 
                 <label for="password"><b>Password</b></label>
-                <input class="form-control" type="password" name="password" required>
+                <input class="form-control" type="password" id="password" name="password" required>
                
                         <hr class="mb-3">
                         
-                <input class="btn byn-primary" class="form-control" type="submit" name="create" value="Sign Up">
+                <input class="btn byn-primary" class="form-control" id="create" type="submit" name="create" value="Sign Up">
                         </div>
                 </div>
             </div>
             </form>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        
+        <script type="text/javascript">
+            
+            $(function(){
+                
+                $('#create').click(function(e){
+                    
+                    var valid = this.form.checkValidity();
+        
+            var firstname   = $('#firstname').val();
+            var lastname    = $('#lastname').val();
+            var email       = $('#email').val();
+            var phone       = $('#phone').val();
+            var password    = $('password').val();
+                    
+                    if(valid){
+                        e.preventDefault();
+                        $.ajax({
+                            type: 'POST',
+                            url: 'process.php',
+                            data: {firstname: firstname,lastname: lastname,email: email,phone: phone,password: password},
+                            success:function(data){
+                                Swal.fire({
+                                    'title':'Successful',
+                                    'text':data,
+                                    'type':'success'
+                                })
+                                
+                                
+                            },
+                            Error:function(data){
+                                Swal.fire({
+                                    'title':'Error',
+                                    'text':'there were errors while saving the data',
+                                    'type':'error'
+                                })
+                            }
+                            
+                            
+                    
+                });
+                   
+                    }
+                    
+                    });
+            });
+            
+        </script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
 </body>
 </html>
